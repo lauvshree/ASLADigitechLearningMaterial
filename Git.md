@@ -37,7 +37,26 @@ Go to https://git-scm.com/download and choose the appropriate one for your compu
 
    The green lines with the plus indicate what has been added in the newer version and the red line with a minus indicated what has been removed from it.
 
-But now the file is local to your machine. It is not available remotely yet. So no one other than you can actually work on the file. But the whole purpose of Git is not just to maintain versions but also to collaborate and work. To do this, we need a remote repository. There are many git repository hosting services available. Many of them offer free option in their package. Github is the most popular remote repository hosting service. Other options available may be explored [here.](https://itsfoss.com/github-alternatives/)
+   But now the file is local to your machine. It is not available remotely yet. So no one other than you can actually work on the file. But the whole purpose of Git is not just to maintain versions but also to collaborate and work. To do this, we need a remote repository. There are many git repository hosting services available. Many of them offer free option in their package. Github is the most popular remote repository hosting service. Other options available may be explored [here.](https://itsfoss.com/github-alternatives/)
+
+   Create a Github free account and log into your account. Once you create an account and verify your email id, you can also follow the guide provided by Github to learn the basics following this link https://guides.github.com/activities/hello-world/
+
+10. On github.com click on ["Create new repository"](https://github.com/new) and create a repository named project1. This will create a remnote repository and give you http link to the repository which will look like this. `https://github.com/<your git username>/project1.git` . This is going to represent the project1 folder we created in our system. To do this we execute the following command from the project1 folder on your system
+`git remote add origin https://github.com/<your git username>/project1.git`
+
+11. We will now push the code to the remote repository using the following command.
+`git push -u origin master`
+
+   Now when we check our remote repository, all the files will be available there along with the commit and version details.
+
+12. Make some changes to the Readme.txt again and commit it and push it. 
+`git commit -m "Made more changes to the file" Readme.txt`
+`git push -u origin master`
+
+   All the changes you did will also be reflected in the remote repository. 
+
+13. Now try to change the file remotely and commit through the github portal. This means the the remote repository has a different version and your local machine is not up-to date with the remote repository. Make changes in the local machine to the same file now and try a commit and push, just like how you did in step 12. It would not let you push as the versions on local machine and the remote machine are not consistent.
+![GitPushFail](gitpushfail.png)
 
 
 
