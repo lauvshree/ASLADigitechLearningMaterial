@@ -3,7 +3,7 @@ Git is one of the most widely used version control system. It is an open source 
 
 ## Git installation
 The first step to working on git is to get the git software downloaded on your system. To check if your system already has git installed, open the terminal and type, `git --help`. If this returns the list of all command options you have for git, it would mean that git is preinstalled in your machine. If it says the command is not recognized, you will have to install git on your machines. 
-Go to [https://git-scm.com/download] and choose the appropriate one for your computer. 
+Go to https://git-scm.com/download and choose the appropriate one for your computer. 
 
 1. In your computer under any directory you like, create a directory name project1
 `mkdir project1`
@@ -28,8 +28,12 @@ Go to [https://git-scm.com/download] and choose the appropriate one for your com
 8. To see how many versions of the file were created and who made the changes on what day and time, git offers a special 'log' command. Type and execute the following command and infer what it says.
 `git log Readme.txt`
 
+![GitLog](gitlog.png)
+
 9. Each commit is assigned a unqiue id. To see the difference between two versions we can copy the unique commit id from the log and check the differences. 
 `git diff <unique commit id 1> <unique commit id 2> Readme.txt`
+
+![Gitdiff](gitdiff.png)
 
    The green lines with the plus indicate what has been added in the newer version and the red line with a minus indicated what has been removed from it.
 
