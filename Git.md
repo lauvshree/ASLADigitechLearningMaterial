@@ -6,31 +6,39 @@ The first step to working on git is to get the git software downloaded on your s
 Go to https://git-scm.com/download and choose the appropriate one for your computer. 
 
 1. In your computer under any directory you like, create a directory name project1
+
 `mkdir project1`
 
 2. Change over to the directory you just created.
+
 `cd project1`
 
 3. Now we will have to init the directory you just created as a git repository to be able to harness the goodness of git versioning system.
+
 `git init`
 
 4. We will create a text file to start with. Let's call it, Readme.txt. Use an editor in your computer to do this and save it project1 directory. 
 
 5. Now we have to tell git that the Readme.txt file is going be a part of the repository so that git can maintain versions of the file, every time we make changes. This is done just the first time when git has no idea about the file at all. 
+
 `git add Readme.txt`
 
 6. `git add` only marks the file for inclusion in the repository. Git doesn't yet start maintaining versions. Once we have added the file to git repository, we have to commit it with a meaningful message so that at a later point of time when you look at all the messages, you know who made what changes for what purpose. Only after committing, git maintains the versions. 
+
 `git commit -m "This is the initial draft of the file" Readme.txt`
 
 7. Now make some changes in the Readme.txt. We will now have to commit the changes, for git to keep track of it.
+
 `git commit -m "Made a few changes to the file" Readme.txt`
 
 8. To see how many versions of the file were created and who made the changes on what day and time, git offers a special 'log' command. Type and execute the following command and infer what it says.
+
 `git log Readme.txt`
 
 ![GitLog](gitlog.png)
 
 9. Each commit is assigned a unqiue id. To see the difference between two versions we can copy the unique commit id from the log and check the differences. 
+
 `git diff <unique commit id 1> <unique commit id 2> Readme.txt`
 
 ![Gitdiff](gitdiff.png)
@@ -42,21 +50,42 @@ Go to https://git-scm.com/download and choose the appropriate one for your compu
    Create a Github free account and log into your account. Once you create an account and verify your email id, you can also follow the guide provided by Github to learn the basics following this link https://guides.github.com/activities/hello-world/
 
 10. On github.com click on ["Create new repository"](https://github.com/new) and create a repository named project1. This will create a remnote repository and give you http link to the repository which will look like this. `https://github.com/<your git username>/project1.git` . This is going to represent the project1 folder we created in our system. To do this we execute the following command from the project1 folder on your system
+
 `git remote add origin https://github.com/<your git username>/project1.git`
 
 11. We will now push the code to the remote repository using the following command.
+
 `git push -u origin master`
 
    Now when we check our remote repository, all the files will be available there along with the commit and version details.
 
 12. Make some changes to the Readme.txt again and commit it and push it. 
+
 `git commit -m "Made more changes to the file" Readme.txt`
+
 `git push -u origin master`
 
    All the changes you did will also be reflected in the remote repository. 
 
 13. Now try to change the file remotely and commit through the github portal. This means the the remote repository has a different version and your local machine is not up-to date with the remote repository. Make changes in the local machine to the same file now and try a commit and push, just like how you did in step 12. It would not let you push as the versions on local machine and the remote machine are not consistent.
 ![GitPushFail](gitpushfail.png)
+
+14. We will now have to do a pull from the repository and then commit our changes. 
+
+`git pull`
+
+15. Git is built smart to automatically merge the changes. But in cases where it is unable to do so, it throws a conflict error which it asks us to manually resolve and commit. 
+
+   * If there is no conflict, your commit and push should through smoothly and should reflect in the remote repository.
+   * If there is a conflict, you have to open the file and maually edit to resolve the conflict. You decide on what you want to keep and what you don't want to. After this, the file has to be added and committed again. 
+
+   `git add Readme.txt`
+   
+   `git commit -m "Resolved all the conflicts between my version and the repository version" Readme.txt`
+
+   `git push -u origin master`
+
+ 
 
 
 
