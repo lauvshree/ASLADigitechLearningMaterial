@@ -85,7 +85,45 @@ Go to https://git-scm.com/download and choose the appropriate one for your compu
 
    `git push -u origin master`
 
- 
+ 16. Git also provides a non-controversial fetch, as an alternative to pull. git fetch downloads new changes from a remote repository - but it doesn't integrate any of these changes into your working files. Fetch is good option to view all the changes made in a remote repository without disturbing your local copy.
+
+`git fetch origin`
+
+17. The idea of branching was to keep the master clean and not as Work-In-Progress. Mostly feature development or bug fixes are done on the branches and then merged to Master after entire functionality works and is tested on the branch, thereby ensuring that the master functionality is always maintained.
+Let's create a branch named branch1 to our master. Branch can either be created on the remote repository and then be fetched using `git fetch && git checkout branch1` or we can create in the local system and then push it to the remote repository. To do the latter, we follow these steps.
+* `git branch branch1`
+* `git checkout branch1`
+
+18. After doing either of the above two steps to create branch, you will be in branch1. Any changes you make to the files here, will not impact the master branch. To check how this works, let's open the Readme.txt and make changes to it and save it, add it and commit it.
+
+
+19. Now switch back to the master branch. To switch from one branch to another we use the git checkout command followed by the branch name.
+
+`git checkout master`
+
+20. The master branch will not have the changes you commited on the branch. It is untouched by the changes until we decide to merge them. 
+
+21. To merge the branch we use the following command which will find a strategy to merge the branch to the head. 
+
+`git merge branch1`
+
+22. There is another way to create a virtual snapshot of a working master (or even a branch for that matter). It is useful when you want to mark a point of time in the history of the repository, when the source code has a certain functionality. It is called tagging. Typically, people use this functionality to mark release points (Version_1.0, Version_1.1 and so on). The tag can have any name but it is ideal to have something meaningful which tells what the respoitory is about at that point of time. 
+
+`git tag -l Version_1.0`
+
+Challenge:
+1. In a team or 2 or 3 create one git repository which will be the master.
+2. Create an empty file in the master to start with.
+3. Each person in the team will have to create a branch and make changes to the file. 
+4. Now merge the changes from the branch on to the head one after the other. 
+5. Analyze the kind of issues you come across when you do this. 
+6. At the end of the exercise, you all should have the same version each of your systems with all of your changes merged to the master.
+
+
+
+
+
+
 
 
 
