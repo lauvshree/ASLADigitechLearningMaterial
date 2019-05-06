@@ -111,6 +111,8 @@ Let's create a branch named branch1 to our master. Branch can either be created 
 
 `git tag -l Version_1.0`
 
+This is a [link](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet) to an amazing cheat sheet for all your Git needs. 
+
 Challenge:
 1. In a team or 2 or 3 create one git repository which will be the master.
 2. Create an empty file in the master to start with.
