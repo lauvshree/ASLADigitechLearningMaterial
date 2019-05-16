@@ -9,7 +9,7 @@ We developed a web API with two end points in our previous exercises. Now we wil
 
 In our code, we will include a pokemon obejct collection and create a new end point to return this array.
 
-```
+```js
 const pokemon = [{
     id : 1,
     name : 'bulbsaur'
@@ -26,7 +26,7 @@ const pokemon = [{
 ```
 And we will also include the end point to retrieve the array.
 
-```
+```js
 app.get("/pokemon", (req,res) => {
     return res.send(pokemon);
 });
@@ -34,7 +34,7 @@ app.get("/pokemon", (req,res) => {
 
 Let's go further and add another endpoint for it to return that one pokemon whose details we want. My end-point to retrieve pokemon 1 would look like *http://localhost:3333/pokemon/1*. But depending on which pokemon we want to retrive the id will vary. So we should make an end-point which can take variable. 
 
-```
+```js
 app.get("/pokemon/:id", (req,res) => {
     //return details of just that pokemon whose id is passed
 });
@@ -42,7 +42,7 @@ app.get("/pokemon/:id", (req,res) => {
 
 How do we retrieve the id that is passed? This can be done through the *req* (httpRequest) object. All of the parameters passed from the client are available through the req object as a dictionary called *params*. We can retrieve the parameters that we want from this dictionary. 
 
-```
+```js
 app.get("/pokemon/:id", (req,res) => {
     const id = req.params.id;
     //return details of just that pokemon whose id is passed
@@ -52,7 +52,7 @@ app.get("/pokemon/:id", (req,res) => {
 You see how we retrieve the *id* from the params and store it in the local variable with the same name, so we can retrieve the pokemon later with that id. There is a nicer way to do this. It is called *object destructuring*.
 This is very useful if you want to retain the same names for the variables as the parameters passed. In our case, we want to call the id paramater as id in our method scope. 
 
-```
+```js
 app.get("/pokemon/:id", (req,res) => {
     const {id} = req.params;
     //return details of just that pokemon whose id is passed
@@ -62,7 +62,7 @@ app.get("/pokemon/:id", (req,res) => {
 Object destructuring is most useful when you have to retrieve multiple parameters from the request object. We will look at this in detail later.
 Based on this id, we have to retrieve the Pokemon from the collection we have. One thing we should keep in mind is that, all the parameters we get from the request object are only available as strings. We have to convert it into the data type we prefer, before using it. In this case, id will be returned as a String. But id in the pokemon object is an int. So, before we look for the object with the same id in the list, we should convert it to int type and then find the pokemon object that matches the id. We use the *find* method which is available in the Java script collections object, which takes a callback as parameter to retrieve the object.
 
-```
+```js
 app.get("/pokemon/:id", (req,res) => {
     const {id} = req.params;
     //Find the pokemon object which matches the id and return it in response.
@@ -74,7 +74,7 @@ Now in the browser when you when you access the end-point [http://localhost:3333
 
 But when you try you retrieve a non-existent id, it just returns an empty page. This is because if *find* doesn't find an object matching, it returns null. Ideally, we should be throwing an appropriate error message when a non-existent id is being accessed. In addition we can also send error codes to let the caller know the request was unsuccessful. More on response codes [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
-```
+```js
 app.get("/pokemon/:id", (req,res) => {
     const {id} = req.params;
     //Find the pokemon object which matches the id
@@ -99,14 +99,14 @@ We have now successfuly retrieved all the pokemons and a specific pokemon we hav
 
 The body cannot be passed to the API just like that. The web application needs to know how to handle the body that is passed in the request object. To achieve this, we need to let the application use a [middleware](https://expressjs.com/en/api.html#express.json).
 
-```
+```js
 //Enable the web application to take JSON formatted input from client.
 app.use(express.json())
 ```
 
 Now let's include the code to handle all of the things we discussed in our to-do list above.
 
-```
+```js
 app.post("/pokemon", (req,res) => {
     //Using object destructuring to store the parameters in local variables
     const {id,name} = req.body;
@@ -125,7 +125,7 @@ app.post("/pokemon", (req,res) => {
 ```
 
 We will use (postman)[https://www.getpostman.com/] to post the new pokemon. To post data from postman, we enter the endpoint and select post method in the postman GUI. In the body, we can send the JSON formatted input to the server. 
-```
+```js
 {
         "id": "6",
         "name" : "charizard"
@@ -138,13 +138,13 @@ The above code will work perfectly for our purpose. You can try to post the new 
 
 We will now include joi in our server application, to validate the post data.
 
-```
+```js
 const Joi = require('joi')//Note that Joi starts with 'J' as it refers to a class.
 ```
 
 We will now use Joi for validating our input by defining a schema and applying the schema to validate what is being posted.
 
-```
+```js
 /*
 We define our schema to ensure that name is a string of length 3 or more characters and it is definitely passed and id is an int which also is definitely passed.
 */
@@ -171,7 +171,7 @@ app.post("/pokemon", (req,res) => {
 Repeat the POST request through postman and see how the web application serves the API request. 
 
 ### The final code
-```
+```js
 //This will search for the module express in the node-modules and import it in for use in this appliction
 
 const express = require('express');
