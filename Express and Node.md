@@ -13,15 +13,15 @@ We are going to use node.js which helps you write server side code and we will u
 
 In the previous examples we worked out how to *fetch* from a remote server and process the response. We used a web API provided by a web application running on a remote server. Now we will look at how we can create such a web API using node.js and Express.js.
 
-It is presumed that you have node.js installed in your system. As the first step to creating a server side application we will create a new directory call api, traverse to that directory in your terminal and run the following command. 
+It is presumed that you have node.js installed in your system. As the first step to creating a server side application we will create a new directory called *api*, traverse to that directory in your terminal and run the following command. 
 
 `npm init`
 
 This will init the api directory to serve as a web application. Follow the 
 prompts on the screen to complete the intialization. 
 * The package name by default is the name of the current folder (*api* in this case). You can specify a different name if you want. 
-* It then asks you for the version you want to set. The default is 1.0.0 and it is recommended you go with the default suggestion. 
-* Next it prompts for a description where you can give a short description of what the api intends to do. We are trying to serve the pokemon requests. So the descrtion can be something like *An api to server Pokemon request*. 
+* Next it asks you for the version you want to set. The default is 1.0.0 and it is recommended you go with the default suggestion. 
+* Next it prompts for a description where you can give a short description of what the api intends to do. We are trying to serve the pokemon requests. So the descrtion can be something like *An api to serve Pokemon requests*. 
 * Next we specify the entry point into the API, which by default is index.js. For conveniecne of use, we will make *api.js* as the entry point. 
 * We will skip the next few prompts (or feel free to fill them in if you fancy it). 
 * When it prompts for the author, you can give your name so that you can claim the rights and credits to the this magical API you are about to create.
@@ -29,7 +29,7 @@ prompts on the screen to complete the intialization.
 * It will generate the contents for your package.json and asks you to check if the details are OK.
 * Once you confirm, the details are all written on to the package.json. 
 
-Open the api folder now in VSCode and you will see the directory structure with all the content, including the api.js and the update package.json. 
+Open the api folder now in VSCode and you will see the directory structure with all the content, including the update package.json. 
 
 The next thing we need to create Web API is express. We will install express through the terminal with the following command. 
 
@@ -72,7 +72,7 @@ Save and run the javascript and it will start the server and start listening on 
 
 You should see *'Hello World!'* rendered. 
 
-Let's add another end point for our server. End-point as you may already know is the access point to an API call on the server. The link we used to access the pokemon API was an end-point. What we created above is also an end point in our server. Now we will add another one.
+Let's add another end point for our server. End-point as you may already know is the access point to an API call on the server. It is called a Web API or REST API. The link we used to access the pokemon API was an end-point. What we created above is also an end point in our server. Now we will add another one.
 
 ```
 /*This will add end point /test to our server which can be accessed through http://localhost:3333/test*/
@@ -84,7 +84,7 @@ app.get("/test", (req,res) => {
 ```
 Save, stop the server (api.js) if it is already running and run the javascript and it will start the server again. Now in your browser navigate to http://localhost:3333/test. See what you get!
 
-But it can be very frustrating to stop and start the server everytime you make changes. There is a package that comes handy in this case. The package is calle *nodemon*. Every time you make changes in the server API, it will automatically restart the server. Let's install that in the same directory where we created our api.js. We will install and store it as a dev dependency with the *--save-dev* option because we want to use this only when we are running the server locally in our development environment. 
+But it can be very frustrating to stop and start the server everytime you make changes. There is a package that comes handy in this case. The package is called *nodemon*. Every time you make changes in the server API, it will automatically restart the server. Let's install that in the same directory where we created our api.js. We will install and store it as a dev dependency with the *--save-dev* option because we want to use this only when we are running the server locally in our development environment. 
 
 `npm install --save-dev nodemon`
 
