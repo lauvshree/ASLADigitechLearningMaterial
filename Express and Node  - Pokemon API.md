@@ -97,7 +97,7 @@ We have now successfuly retrieved all the pokemons and a specific pokemon we hav
 * Insert the new pokemon object into the existing array
 * Return the pokemon object or a relevant message saying the pokemon object has been added. 
 
-The body cannot be passed to the API just like that. The web application needs to know how to handle the body that is passed in the request object. To achieve this, we need to let the application use a (middleware)[https://expressjs.com/en/api.html#express.json].
+The body cannot be passed to the API just like that. The web application needs to know how to handle the body that is passed in the request object. To achieve this, we need to let the application use a [middleware](https://expressjs.com/en/api.html#express.json).
 
 ```
 //Enable the web application to take JSON formatted input from client.
