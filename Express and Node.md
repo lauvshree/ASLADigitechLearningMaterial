@@ -94,7 +94,7 @@ Once the installation is complete, you will see that the package.json file in th
     *"nodemon": "^1.19.0"*
 *}*
 
-The ^ sympbol in front of the 1 denotes that the devDependencies will auto update for all the version starting with 1. eg., 1.20.x, 1.21.x and so on.
+The ^ symbol in front of the 1 denotes that the devDependencies will auto update for all the version starting with 1. eg., 1.20.x, 1.21.x and so on.
 Once nodemon is installed, we will make changes to package.json to make use of this and re-start the script when there are changes. We will include the *"start" : "nodemon api.js"* in the scripts section of our package.json. With the changes, the package.json will look like this. 
 
 ```
