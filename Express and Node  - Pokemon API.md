@@ -1,7 +1,7 @@
 ## Lecture ✍️
 
 #### Prerequisites
-You should be comfortable with created a web API with end points 
+You should be comfortable with creating a web API with end points 
 
 #### Pokemon API
 
