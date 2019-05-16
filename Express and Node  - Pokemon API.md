@@ -32,7 +32,7 @@ app.get("/pokemon", (req,res) => {
 });
 ```
 
-Let's go further and add another endpoint for it to return that one pokemon whose details I want. My end-point to retrieve pokemon 1 would look like *http://localhost:3333/pokemon/1*. But depending on which pokemon I want to retrive the id will vary. So I should make an end-point which can take variable. 
+Let's go further and add another endpoint for it to return that one pokemon whose details we want. My end-point to retrieve pokemon 1 would look like *http://localhost:3333/pokemon/1*. But depending on which pokemon we want to retrive the id will vary. So we should make an end-point which can take variable. 
 
 ```
 app.get("/pokemon/:id", (req,res) => {
@@ -60,7 +60,7 @@ app.get("/pokemon/:id", (req,res) => {
 ```
 
 Object destructuring is most useful when you have to retrieve multiple parameters from the request object. We will look at this in detail later.
-Based on this id, we have to retrieve the Pokemon from the collection we have. One thing we should keep in mind is that, all the parameters we get from the request object are only available as strings. We have to convert it into the data type we prefer, before using it. In this case, id will be returnd as a String. But id in the pokemon object is an int. So before we look for the object with the same id in the list, we should convert it to int type and then find the pokemon object that matches the id. We use the *find* method which is available in the Java script collections object, which takes a callback as parameter to retrieve the object.
+Based on this id, we have to retrieve the Pokemon from the collection we have. One thing we should keep in mind is that, all the parameters we get from the request object are only available as strings. We have to convert it into the data type we prefer, before using it. In this case, id will be returned as a String. But id in the pokemon object is an int. So, before we look for the object with the same id in the list, we should convert it to int type and then find the pokemon object that matches the id. We use the *find* method which is available in the Java script collections object, which takes a callback as parameter to retrieve the object.
 
 ```
 app.get("/pokemon/:id", (req,res) => {
@@ -82,12 +82,13 @@ app.get("/pokemon/:id", (req,res) => {
     if(!mypoke) { //if poke is not a valid object
         //Send error message as response along with 404 error code
         return res.status(404).send(`Pokemon with id ${id} not found`);
+    } else {
+        return res.send(mypoke);
     }
-    return res.send(mypoke);
 });
 ```
 
-We have now successfuly retrieved all the pokemons and a specific pokemon we have. In CRUD (Create, Retrieve, Update, Delete), we have done the *R*. Now let's see how we can add a pokemon object. The *C* in CRUD. For this, we use a post API. But let's look at the things we need to do. 
+We have now successfuly retrieved all the pokemons and a specific pokemon we have. In CRUD (Create, Retrieve, Update, Delete), we have done the *R*. Now let's see how we can add a pokemon object. The *C* in CRUD. For this, we use a post request. But let's look at the things we need to do. 
 
 ### To-Do list for POST request
 * Grab the values from the request object
@@ -123,7 +124,7 @@ app.post("/pokemon", (req,res) => {
 });
 ```
 
-We will use (postman)[https://www.getpostman.com/] to post the new pokemon. To post data from postman, we enter the endpoint and select post method. In the body we can send the JSON formatted input to the server. 
+We will use (postman)[https://www.getpostman.com/] to post the new pokemon. To post data from postman, we enter the endpoint and select post method in the postman GUI. In the body, we can send the JSON formatted input to the server. 
 ```
 {
         "id": "6",
