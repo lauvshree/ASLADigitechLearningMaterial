@@ -107,6 +107,21 @@ Let's now retrieve all the data in the pokemon collection.
 ```
 db.pokemon.find()
 ```
+You will see when the data is retreived that the first item in the document retrieved is something like this - *"_id" : ObjectId("5ce2022ca19fe24218a7831f")*. This is because MongoDB maintains a unique key for all the documents. If you want to use the id you are providing as this unique key, you may do so by prefixing '_' for the id. 
+
+```
+db.pokemon.insert({
+    _id:1,
+    name:'bulbsaur',
+    height:'6 cm'
+})
+```
+
+To retrieve the data in a more readable format we can use the **pretty** method on the output of find.
+
+```
+db.pokemon.find().pretty()
+```
 
 In this case, we inserted just one pokemon data. What if we want to enter more than one. We can either run the above command multiple times or pass the data as an array. 
 
@@ -116,7 +131,7 @@ db.pokemon.insert([{id:2,name:'ivusaur',height:'99.1 cm'},{id:3,name:'venusaur',
 
 The array is indicated in the above command with square brackets; each unit of data is within curly brackets, {*data here*} and comma separated from each other. The output will indicate that there was a bulk insert attempted and will also tell the user how many units of data were added.
 
-Now when you do a *db.pokemon.find()* you should see all the three pokemons listed.
+Now when you do a *db.pokemon.find()* you should see all the three pokemons listed. You can also make other keys unique or combination of keys by creating index. It is not within the scope of this document. You can refer to [https://docs.mongodb.com/master/crud/]
 
 
 #### Task 
@@ -160,6 +175,7 @@ db.pokemon.find( { id: { $lt: 4 } } )
 db.pokemon.find( { id: { $gt: 2 } } )
 
 ```
+
 ### Update
 Now that we are familiar with C and R of the **CRUD**, let's look at U. To update a document, we need to finrst identify a document based on a condition and then update the document. So update in Mongo DB takes two parameters; first one to identify the document to be updated and the second one which has the changes. 
 Let's change the document which has id as 1 to have a different name. 
@@ -169,9 +185,22 @@ db.pokemon.update({id:1},{$set:{name:'diffsaur'}})
 ```
 
 This command identifies the document with id 1 and changes the name to diffsaur. Let's do a *db.pokemon.find()* to see the records in the collection to ensure our changes have happened. Update will by default only update the first document that is matched. If you want to update multiple documents at once, we have to specify the third and fourth boolean parameters which are for 
-* **upsert** - This is a combination of update and insert (true/false - if this should be an “upsert” operation; that is, if the record(s) do not exist, insert one. Upsert by default is true and only inserts a single document) and 
+* **upsert** - This is a combination of update and insert (true/false - if this should be an “upsert” operation; that is, if the record(s) do not exist, insert one. Else update the existing one. Upsert by default is true and only inserts/updates a single document) and 
 * **multiple** (true/false - indicates if all documents matching criteria should be updated rather than just one.)
 
+Let's try to make an update to a non-existent document.
+
+```
+db.pokemon.update({id:19},{$set:{name:'newsaur',height:'5 m'}})
+```
+
+This command when run will not update any document as there is no document with id 19. You can verify the same running *db.pokemon.find()*
+
+If we run the same command with *upsert=true* option, it will see that there is no matching document which it can update and will insert a new one. 
+
+```
+db.pokemon.update({id:19},{$set:{name:'newsaur'},height:'5 m'},{upsert:true})
+```
 
 Now what if we decide to have an additional field for imageURL for all the pokemon? We can add a column to the existing documents with the following command.
 
@@ -189,5 +218,6 @@ db.pokemon.remove({name: /diff/})
 ```
 
 This will retrieve all records where the name contains the word 'diff' and delete them. Remove has to be handled diligently. *db.pokemon.remove({})* will remove all the records in the collection and  *db.pokemon.remove()* without any parameters will delete the entire collection. 
+
 
 
