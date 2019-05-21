@@ -247,7 +247,7 @@ But as mentioned before, this defeats the purpose of NoSQL and is not ideal.
 
 ### Populating DB from JSON
 
-Inserting data into Mongo DB through a CLI can be very tedious. We can however import the documents from a json array stored in a file. Let's import the data from [package.json](./package.json). We will quit the mongo CLI using the `quit()` command. We will traverse to the directory where we store package.json in the local system. We will first remove all the current documents in the pokemon collection with `db.pokemon.remove({})` and add the data from the file into that collection.
+Inserting data into Mongo DB through a CLI can be very tedious. We can however import the documents from a json array stored in a file. Let's import the data from [pokemon.json](./pokemon.json). We will quit the mongo CLI using the `quit()` command. We will traverse to the directory where we store package.json in the local system. We will first remove all the current documents in the pokemon collection with `db.pokemon.remove({})` and add the data from the file into that collection.
 
 ```
 mongoimport --jsonArray --db pokedex --collection pokemon --file pokemon.json
