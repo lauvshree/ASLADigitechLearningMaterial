@@ -199,13 +199,13 @@ This command when run will not update any document as there is no document with 
 If we run the same command with *upsert=true* option, it will see that there is no matching document which it can update and will insert a new one. 
 
 ```
-db.pokemon.update({id:19},{$set:{name:'newsaur'},height:'5 m'},{upsert:true})
+db.pokemon.update({id:19},{$set:{name:'newsaur',height:'5 m'}},{upsert:true})
 ```
 
-Now what if we decide to have an additional field for imageURL for all the pokemon? We can add a column to the existing documents with the following command.
+Now what if we decide to have an additional field for moves for all the pokemon? We can add a column to the existing documents with the following command.
 
 ```
-db.pokemon.update({},{$set:{"imageUrl":''}},false,true)
+db.pokemon.update({},{$set:{"moves":''}},false,true)
 ```
 Here the '{}' implies there is not conditions or restrictions and all the documents need to be updated. 
 
@@ -217,7 +217,48 @@ Now that we know how to retrieve all documents and also selective documents base
 db.pokemon.remove({name: /diff/})
 ```
 
-This will retrieve all records where the name contains the word 'diff' and delete them. Remove has to be handled diligently. *db.pokemon.remove({})* will remove all the records in the collection and  *db.pokemon.remove()* without any parameters will delete the entire collection. 
+This will retrieve all records where the name contains the word 'diff' and delete them. Remove has to be handled diligently. *db.pokemon.remove({})* will remove all the records in the collection.
 
+### Nested queries
+Mongo DB is not meant for relational purpose. For that we have RDBMS. However, Mongo DB supports nested querying. Just to show case let us create another collection, which has the moves and insert some moves into it. 
 
+```
+db.createCollection('moves')
 
+db.moves.insert([{ _id:1, name:'pound'}, { _id :2, name:'karate chop'},{_id :3, name:'double slap'}])
+```
+
+We will now modify the pokemon collection to include moves.
+
+```
+db.pokemon.update({id:1},{$set:{moves:[2,3]}})
+
+db.pokemon.update({id:2},{$set:{moves:[1,3]}})
+
+db.pokemon.update({id:3},{$set:{moves:[1,2]}})
+```
+
+Now we have two collections. One with the pokemon details where the moves have just the ids and the other with the moved where the id of the move and the name of the move are stored. To get all the pokemons which have the move 'karate chop', we will issue a nested query like this.
+
+```
+db.pokemon.find({moves: db.moves.findOne({'name': 'karate chop'})._id}).pretty()
+```
+But as mentioned before, this defeats the purpose of NoSQL and is not ideal. 
+
+### Populating DB from JSON
+
+Inserting data into Mongo DB through a CLI can be very tedious. We can however import the documents from a json array stored in a file. Let's import the data from [package.json](./package.json). We will quit the mongo CLI using the `quit()` command. We will traverse to the directory where we store package.json in the local system. We will first remove all the current documents in the pokemon collection with `db.pokemon.remove({})` and add the data from the file into that collection.
+
+```
+mongoimport --jsonArray --db pokedex --collection pokemon --file pokemon.json
+```
+
+Here we are mentioning the data is a jsonArray which we are importing in the database named pokedex inside a collection named pokemon from a file name *pokemon.json*. Now let's go back into Mongo CLI and see if the data has been imported.
+
+```
+use pokedex
+
+db.pokemon.find().pretty()
+```
+
+This will list all the pokemon from the collection (which was imported from the file).
