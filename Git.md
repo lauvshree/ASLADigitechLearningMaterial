@@ -27,9 +27,13 @@ Go to https://git-scm.com/download and choose the appropriate one for your compu
 
 `git commit -m "This is the initial draft of the file" Readme.txt`
 
-7. Now make some changes in the Readme.txt. We will now have to commit the changes, for git to keep track of it.
+7. Now make some changes in the Readme.txt. We will now have to add and commit the changes, for git to keep track of it. Only when you `add` git stages the file for commit.
 
-`git commit -m "Made a few changes to the file" Readme.txt`
+```
+git add Readme.txt
+git commit -m "Made a few changes to the file" Readme.txt
+```
+*PS - However if you decided you don't want to commit the file and you want to unstage it,   `git reset HEAD <file>` will get the last commit. If you want to retain the changes, you can do `git checkout -- <file>`*
 
 8. To see how many versions of the file were created and who made the changes on what day and time, git offers a special 'log' command. Type and execute the following command and infer what it says.
 
