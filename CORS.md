@@ -163,4 +163,4 @@ The default configuration of CORS application is
 }
 ```
 
-This means, it allows all origins, all methods, does not pass the output of a preflight check to the next request, a status code to use for successful OPTIONS requests (some legacy browsers choke on 204). We can change these options to make the API selectively restrictive. You can read more about CORS (here)[https://expressjs.com/en/resources/middleware/cors.html].
+This means, it allows all origins, all methods, does not pass the output of a preflight check to the next request, a status code to use for successful OPTIONS requests (some legacy browsers choke on 204). We can change these options to make the API selectively restrictive. You can read more about CORS [here](https://expressjs.com/en/resources/middleware/cors.html).
