@@ -103,7 +103,16 @@ class App extends React.Component {
         this.setState({input: this.state.input + val});  
       } else {
         this.setState({operator:val});
-        this.setState({input: this.state.previousNumber + val});  
+        if(this.isValidOperand(this.state.input.charAt(this.state.input.length-1))) {
+            this.setState({input: this.state.previousNumber + val});  
+        } else {
+            let calcValue = this.calculateValue( this.state.previousNumber,
+                this.state.currentNumber,
+                this.state.operator)
+            this.setState({input:calcValue + val}); 
+            this.setState({previousNumber:calcValue}); 
+            this.setState({currentNumber:""});
+        }
       }
     } else if (val === "=") {
       if(this.state.previousChar === val) {
