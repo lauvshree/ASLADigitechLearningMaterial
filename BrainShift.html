@@ -1,0 +1,258 @@
+<html>
+<style>
+.game_button {
+    display:flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 4em;
+    background-color: orange;
+    color: white;
+    outline: 1px solid #888;
+    margin: 1cm
+}
+
+.game_label {
+    display:flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.44em;
+    background-color: rgb(68, 60, 46);
+    color: white;
+    outline: 1px solid #888;
+    margin: 1cm;
+    height: 5ch
+}
+
+.question_label {
+    display:flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.44em;
+    color: white;
+    height: 5ch
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width:100%;  
+}
+  
+  .game_box {
+    width: 400px;
+    height:600px;
+    background-color: black;
+}
+
+.button_rows {
+    display:flex;
+    width:100%;
+  }
+
+</style>
+<script src= "https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src= "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<body>
+
+    <div id="root"></div>
+
+<script type="text/babel">
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    isVowel : false,
+    isEven : false,
+    isEvenQuestionAsked : false,
+    counter : 0,
+    correctCounter : 0,
+    gameStarted : false,
+    questionLabel : "",
+    answerLabel : "",
+    topCombo : "",
+    bottomCombo : ""
+  }
+  
+    isEvenQuestion = "Is this number even?";
+    isVowelQuestion = "Is this letter a vowel?";
+
+    VOWELS = "AEIOU";
+    CONSANANTS = "BCDFGHJKLMNPQRSTVWXYZ";
+
+    toggle = () => {
+        return Math.round((Math.random()));
+    }
+
+    startNewGame = () => {
+            if(this.state.gameStarted === false) {
+                this.setState({gameStarted : true});
+                setTimeout(this.endGame, 20000);
+            }
+    }        
+
+    generateQuestions = () => {
+        this.startNewGame();
+        let i = this.toggle();
+        let j = this.toggle();
+        let k = this.toggle();
+        let charSel;
+        let numSel;
+        let numToChar;
+        let comboToPrint;
+
+            if(j==0) {
+                let randomidx = Math.round((Math.random())*4);
+                charSel = this.VOWELS.charAt(randomidx);
+                this.setState({isVowel : true});
+            } else {
+                let randomidx = Math.round((Math.random())*20);
+                charSel = this.CONSANANTS.charAt(randomidx);
+                this.setState({isVowel : false});
+            }
+            
+            numSel = Math.round((Math.random())*9);
+            numToChar = numSel+"";
+            if(numSel % 2 == 0) {
+                this.setState({isEven : true});
+            } else {
+                this.setState({isEven : false});
+            }
+
+            if(k==0) {
+                comboToPrint = numToChar+charSel;
+            } else {
+                comboToPrint = charSel+numToChar;
+            }
+
+            if(i==0) {
+                this.setState({questionLabel : this.isEvenQuestion});
+                this.setState({topCombo : comboToPrint});
+                this.setState({bottomCombo : "  "});
+                this.setState({isEvenQuestionAsked :true});
+            } else {
+                this.setState({questionLabel : this.isVowelQuestion});
+                this.setState({topCombo : "  "});
+                this.setState({bottomCombo : comboToPrint});
+                this.setState({isEvenQuestionAsked :false});
+            }
+        }
+
+        checkYes = () => {
+            if(this.state.isEvenQuestionAsked && this.state.isEven) {
+                this.setRight();
+            } else if (!this.state.isEvenQuestionAsked && this.state.isVowel){
+                this.setRight();
+            } else {
+                this.setWrong();
+            }
+            this.generateQuestions();
+        }
+        
+        checkNo = () => {
+            if(this.state.isEvenQuestionAsked && !this.state.isEven) {
+                this.setRight();
+            } else if (!this.state.isEvenQuestionAsked && !this.state.isVowel) {
+                this.setRight();
+            } else {
+                this.setWrong();
+            }
+            this.generateQuestions();
+        }
+
+        setRight = () => {
+                this.setState({correctCounter : this.state.correctCounter+1});
+                this.setState({counter : this.state.counter+1});
+                this.setState({answerLabel:"You are right!"})
+        }
+
+        setWrong = () => {
+                this.setState({counter : this.state.counter+1});
+                this.setState({answerLabel:"Uh oh! You are wrong!"})
+        }
+
+        endGame = () => {
+            if(this.state.gameStarted) {
+                alert(`Great! ${this.state.correctCounter} out of ${this.state.counter}`);
+                this.setState({isVowel : false});
+                this.setState({isEven : false});
+                this.setState({isEvenQuestionAsked : false});
+                this.setState({counter : 0});
+                this.setState({correctCounter : 0});
+                this.setState({gameStarted : false});
+                this.setState({questionLabel : ""});
+                this.setState({answerLabel : ""});
+                this.setState({topCombo : ""});
+                this.setState({bottomCombo : ""});
+            }
+            this.generateQuestions();
+        }
+        
+
+    componentDidMount = () => {
+        this.generateQuestions();
+    }
+
+    render = ()=> {
+        return <div className="App">
+                <div className="game_box">
+                    <div className="button_rows">
+                        <Label className="question_label">{this.state.questionLabel}</Label>
+                    </div>
+                    <div className="button_rows">
+                        <Label className="game_label">{this.state.topCombo}</Label>
+                    </div>
+                    <div className="button_rows">
+                        <Label className="game_label">{this.state.bottomCombo}</Label>
+                    </div>
+                    <div className="button_rows">
+                        <Button handleClick={this.checkYes}>Yes</Button>
+                        <Button  handleClick={this.checkNo}>No</Button>
+                    </div>
+                    <div className="button_rows">
+                        <Label className="question_label">{this.state.answerLabel}</Label>
+                    </div>
+        </div>
+    </div>;
+  }
+
+}
+
+class Button extends React.Component {
+    render() {
+        return(
+            <div    className="game_button" 
+                    onClick={()=> this.props.handleClick(this.props.children)}>
+                {this.props.children}
+            </div>);
+        
+    }
+}
+
+class Label extends React.Component {
+    render() {
+        return(
+            <div    className={this.props.className}>
+                {this.props.children}
+            </div>);
+        
+    }
+}
+
+ReactDOM.render(<App/>,document.getElementById("root"));
+
+</script>
+
+</body>
+</html>
