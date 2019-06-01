@@ -6,7 +6,7 @@
     flex: 1;
     align-items: center;
     font-weight: bolder;
-    font-size: 4em;
+    font-size: 2em;
     background-color: orange;
     color: white;
     outline: 1px solid #888;
@@ -27,6 +27,18 @@
     height: 5ch
 }
 
+.score_label {
+    display:flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.44em;
+    color: white;
+    margin: 1cm;
+    height: 5ch
+}
+
 .question_label {
     display:flex;
     justify-content: center;
@@ -38,6 +50,7 @@
     height: 5ch
 }
 
+
 .App {
     display: flex;
     justify-content: center;
@@ -47,8 +60,8 @@
 }
   
   .game_box {
-    width: 400px;
-    height:600px;
+    width: 100%;
+    height:100%;
     background-color: black;
 }
 
@@ -67,7 +80,24 @@
 
 <script type="text/babel">
 
-class App extends React.Component {
+
+class StartScreen extends React.Component {
+    render = () => {
+        return <div className="App">
+                <div className="game_box">
+                    <div className="button_rows">
+                            <Button handleClick={this.props.game}>Start Game</Button>
+                    </div>
+                    <div className="button_rows">
+                        <Label className="score_label">{this.props.prevScore}</Label>
+                    </div>
+
+                </div>
+                </div>
+    }
+}
+
+class Game extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -95,15 +125,7 @@ class App extends React.Component {
         return Math.round((Math.random()));
     }
 
-    startNewGame = () => {
-            if(this.state.gameStarted === false) {
-                this.setState({gameStarted : true});
-                setTimeout(this.endGame, 20000);
-            }
-    }        
-
     generateQuestions = () => {
-        this.startNewGame();
         let i = this.toggle();
         let j = this.toggle();
         let k = this.toggle();
@@ -184,7 +206,6 @@ class App extends React.Component {
 
         endGame = () => {
             if(this.state.gameStarted) {
-                alert(`Great! ${this.state.correctCounter} out of ${this.state.counter}`);
                 this.setState({isVowel : false});
                 this.setState({isEven : false});
                 this.setState({isEvenQuestionAsked : false});
@@ -198,10 +219,14 @@ class App extends React.Component {
             }
             this.generateQuestions();
         }
-        
-
+    
+    
     componentDidMount = () => {
         this.generateQuestions();
+        
+        setTimeout(()=> {
+            this.props.update(`Well done! ${this.state.correctCounter}/${this.state.counter}`)
+        },20000);
     }
 
     render = ()=> {
@@ -246,6 +271,38 @@ class Label extends React.Component {
             <div    className={this.props.className}>
                 {this.props.children}
             </div>);
+        
+    }
+}
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    updateScore = (s) => {
+        this.setState({score:s});
+        this.setState({runGame:"Start"});
+    }
+
+    startNewGame = () => {
+        this.setState({runGame : "Game"});
+        this.setState({gameStarted : true})
+    }
+
+    state = {
+        score:"",
+        runGame:"Start",
+        showScore:false,
+        gameStarted : false,
+    }
+
+    render = ()=> {
+        if(this.state.runGame === "Start") {
+            return <StartScreen game={this.startNewGame} prevScore={this.state.score}/>
+        } else {
+            return <Game update={this.updateScore}/>;
+        }
         
     }
 }
