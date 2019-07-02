@@ -1,13 +1,13 @@
 
-Java is an Objected Oriented language and has been around for more than 20 years now. It was built with an intent of making an OS indendent language - Write once, run anywhere. This may sound very alien to the stage at which the technological evolution has brought us today but the fact is the predecessors of Java had to be compiled and run in each OS with System specific compilers and interpreters. 
+Java is an Objected Oriented language and has been around for more than 20 years now. It was built with an intent of making an OS independent language - Write once, run anywhere. This may sound very alien to the stage at which the technological evolution has brought us today but the fact is the predecessors of Java had to be compiled and run in each OS with System specific compilers and interpreters. 
 
 Any new Computer language innovation and development occurs for two fundamental
 reasons:
 •	 To adapt to changing environments and uses
 •	 To implement refinements and improvements in the art of programming
 
-There are many languages and new ones every now and then which testify the above statements. The predecessor of Java is C++. C language is the predecessor of C++. C came into being to satisfy the need for an was an efficient programming language which could be used for complex programming and was at the same time easy to learn. C had support for structures which are similar to the class attributes in the Object Oriented langauages. But the structures had to be used as is and it was more of a virtual grouping than reusable components. 
-Structure is a collection of variables under a single name.
+There are many languages and newer ones every now and then which testify the above statements. The predecessor of Java is C++. C language is the predecessor of C++. C came into being to satisfy the need for an was an efficient programming language which could be used for complex programming and was at the same time easy to learn. C had something called structures. Structures look very similar to class in the modern languages. But the structures had to be used as is and it was more of a virtual grouping than reusable components. 
+Structure is just a collection of variables under a single name.
 
 For example: You want to store information about a person: his/her name, age and email. If you now want to store information about 3 persons, we will end up doing:
 
