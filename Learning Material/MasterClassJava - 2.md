@@ -46,20 +46,11 @@ JVM stands for Java Virtual Machine. It is a Virtual Machine which understands b
 
 In the example we saw above, can you identify the classes that would be loaded in the JVM?
 
-
-### Members of a class
-A class can have attibutes, methods and special methods called constructors.
-
-attributes - 
-
-
-The idea of making it all classes was to make it reusable to the best possible extent.
-
 ### OOPs they did it again:
 
 Object Oriented Programming as the name says is based on Objects. What are objects? Objects are instances of a class. 
 
-Classes are more like reusable templates. They have certain attributes. Look at the images below.
+Classes are more like reusable templates. Look at the images below.
 
 ![Class](ClubMemberClass.png)
 
@@ -67,9 +58,32 @@ Classes are more like reusable templates. They have certain attributes. Look at 
 
 ![Object](ClubMemberObject.png)
 
-The class provides methods called setters and getters which help set values of these attributes and get values of these attributes. The class will also provide other methods that can be invoked on the object. 
+
+### Members of a class
+A class can have attibutes, methods and special methods called constructors.
+
+Attributes are distinct features of the class. The attributes can be public, protected, private or default (default is when you specify nothing; don't actually write the word default). Attibutes can be static or non-static (again, non-static is when you give nothing; don't actually write the word non-static). Static like the word implies, will have the same value for all the instances of the class. When a member is non-static, it will have a different value for each object.
 
 ```
+public class APEmployee {
+	priavte String name = null;
+	private String emp_code = null;
+	private static String companyName = "Australia Post";
+}
+```
+
+#### Template for attribute definition:
+<access modifier> <non-access modifier> <data type> <variable name> = <initial value>;
+	
+
+Methods are callable functions you can call on the objects of the class. They can be doing simple things like printing a message or a very complex thing. Most modern day IDEs will have generator for standard methods which are expected to be in a class.
+
+
+
+When we ran a class we loaded the class. 
+The idea of making it all classes was to make it reusable to the best possible extent.
+
+
 public class Customer {
 	
 	String name;
