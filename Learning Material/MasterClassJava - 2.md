@@ -42,7 +42,7 @@ https://www.tutorialspoint.com/compile_java_online.php
 
 
 ### JVM 
-JVM stands for Java Virtual Machine. It is a Virtual Machine which understands bytecodes and can load a class object, allocate and manage memory for all the objects which are in-turn required. The analogy is like a Windows Media player application which knows to read mp3 files and produce music from it. JVM is not platform independent. There is JRE for each kind of operating system. They `java` application in the JRE starts the JVM.
+JVM stands for Java Virtual Machine. It is a Virtual Machine which understands bytecodes and can load a class object, allocate and manage memory for all the objects which are in-turn required. The analogy is like a Windows Media player application which knows to read mp3 files and produce music from it. JVM is not platform independent. There is JRE for each kind of operating system. The `java` application in the JRE starts the JVM.
 
 In the example we saw above, can you identify the classes that would be loaded in the JVM?
 
@@ -52,17 +52,20 @@ Object Oriented Programming as the name says is based on Objects. What are objec
 
 Classes are more like reusable templates. Look at the images below.
 
-![Class](ClubMemberClass.png)
+#### Class
 
+<img src="ClubMemberClass.png" width="200px">
 
+#### Object 
 
-![Object](ClubMemberObject.png)
-
+<img src="ClubMemberObject.png" width="200px">
 
 ### Members of a class
-A class can have attibutes, methods and special methods called constructors.
+A class can have attributes, methods and special methods called constructors.
 
-Attributes are distinct features of the class. The attributes can be public, protected, private or default (default is when you specify nothing; don't actually write the word default). Attibutes can be static or non-static (again, non-static is when you give nothing; don't actually write the word non-static). Static like the word implies, will have the same value for all the instances of the class. When a member is non-static, it will have a different value for each object.
+Attributes are distinct features of the class. The attributes can have different kind of access. They can be public, protected, private or default (default is when you specify nothing; don't actually write the word default). Attributes can be static or non-static (again, non-static is when you give nothing; don't actually write the word non-static). Static like the word implies, makes the attribute static. It will have the same value for all the instances of the class. When a member is non-static, it will have a different value for each object.
+
+Let's create this class in the STS IDE.
 
 ```
 public class APEmployee {
@@ -72,18 +75,99 @@ public class APEmployee {
 }
 ```
 
+
 #### Template for attribute definition:
+```
 <access modifier> <non-access modifier> <data type> <variable name> = <initial value>;
+```
+
+
+#### Template for method definition:
+```
+<access modifier>   <non-access modifier>   <return data type>   <method name> 
+
+{
+	......
+}	
+```
+
+
+<table>
+	<tr>
+		<td>
+			access modifier
+		</td>	
+		<td>
+			public, private, protected, default
+		</td>
+	</tr><tr>
+		<td>
+			non-access modifier
+		</td>	
+		<td>
+			static, non-static
+		</td>
+	</tr><tr>
+		<td>
+			data type
+		</td>	
+		<td>
+			primitive data type, Java classes, user-defined classes 
+		</td>
+	</tr><tr>
+		<td>
+			name
+		</td>
+		<td>
+			Can be anything. Convention start with small letter. If it is compund words, start the consequtive words with uppercase eg., getUserName
+		</td>
+	</tr>
+</table>
 	
 
-Methods are callable functions you can call on the objects of the class. They can be doing simple things like printing a message or a very complex thing. Most modern day IDEs will have generator for standard methods which are expected to be in a class.
+Methods are callable functions you can call on the objects of the class. They can be doing simple things like printing a message or a very complex thing. Most modern day IDEs will have generator for standard methods which are expected to be in a class. 
+
+Let's generate some methods in the IDE for the APEmployee class we created. 
+
+Before we can access attributes or methods of an object, we need to create an object. To create object or rather construct objects we use constructors.
+
+#### Constructors
+These are special methods, which have the same name as the class and have no return types. They have implicit return types and they always return and object of the class. We follow the syntax below to create Objects.
+
+`APEmployee apEmployee1 = new APEmployee();`
+
+Let's create a runnable class, create an Object of APEmployee and invoke the generated methods.
+
+```
+public class EmployeeGenerator {
+
+	public static void main(String[] args) {
+		
+		APEmployee.setCompanyName("Australia Post");
+
+		APEmployee apEmployee1 = new APEmployee();
+		apEmployee1.setEmpCode("E001");
+		apEmployee1.setName("Phil Jackson");
+		
+		System.out.println(apEmployee1);
+
+		APEmployee apEmployee2 = new APEmployee();
+		apEmployee2.setEmpCode("E002");
+		apEmployee2.setName("Linah Wafai");
+		
+		System.out.println(apEmployee2);
+	}
+
+}
+```
 
 
+When we run a class we load the class. The idea of making it all classes was to make it reusable to the best possible extent. There are more than one way in which class can be used. 
+* We can create object
+	This
+* We can inherit from the class
 
-When we ran a class we loaded the class. 
-The idea of making it all classes was to make it reusable to the best possible extent.
-
-
+```
 public class Customer {
 	
 	String name;
@@ -91,4 +175,6 @@ public class Customer {
 
 }
 ```
+
+
 The attributes and methods of a class can have different access. They can be public, private, protected or when nothing is mentioned, have default access. Most attributes of a class are kept as private members. 
