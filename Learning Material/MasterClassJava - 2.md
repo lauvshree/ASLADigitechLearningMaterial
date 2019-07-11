@@ -23,6 +23,7 @@ https://www.tutorialspoint.com/compile_java_online.php
     }
 }
  ```
+ Java langauge grammar thrives on { } and ;. Every block of code in Java has to be within {} and every statement which is to be executed should end with ;. You may recollect the tab spacing in Python. { ... } serves the same purpose here. 
  
  Try a few things:
  1. Try removing the word public in the class. 
@@ -36,7 +37,7 @@ https://www.tutorialspoint.com/compile_java_online.php
 3. The class should have a public static void main method which takes a String [] argument.
 4. The String [] argument is nothing but the command line arguments you give the class when you run it. You can refer to the string array with any variable name. Commonly used ones as *s* and *args*.
 5. A class has to be written in a file with the extension Java.
-6. A class is first compiled and then run. A class can be compiled on one system and run on another system - Platform independence 
+6. A class is first compiled and then run. Compilation is the process of converting the source Java file into bytecodes, which the JVM understands. A class can be compiled on one system and run on another system - Platform independence 
 7. When you compile a .java file, it produces a .class file with the same name if the compilation is successful. The .class file contains bytecodes (non-human readable form) which can be interpreted by an Operating System which has Java Runtime Environment set up. 
 8. Most computers in the modern days have Java Runtime Environment.
 
@@ -179,11 +180,13 @@ public class APEmployee {
 	}
 	
 	public APEmployee(String name) {
+		//this refers to the current object
 		this.name = name;
 		this.emp_code = empCodePrefix+(++empCount);
 	}		
 }
 ```
+*this is similar to the self in Python. It is how the object can refer to itself*
 
 #### Point to ponder
 
