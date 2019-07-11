@@ -48,7 +48,7 @@ In the example we saw above, can you identify the classes that would be loaded i
 
 ### OOPs they did it again:
 
-The foundation of Object Oriented Programming is Inheritance, Data Encapsulation, Over-riding, Over-loading and Polymorphism. Before we head on to understand what each of this are, let's scaffold Objects. Clone this repository and import it into a java project folder in STS for further learning. 
+The foundation of Object Oriented Programming is Inheritance, Data Encapsulation, Over-riding, Over-loading and Polymorphism. Before we head on to understand what each of this are, let's scaffold Objects. Clone this repository and import it into a java project folder in STS for further learning. https://github.com/lauvshree/javaexamples.git
 
 
 Object Oriented Programming as the name says is based on Objects. What are objects? Objects are instances of a class. 
