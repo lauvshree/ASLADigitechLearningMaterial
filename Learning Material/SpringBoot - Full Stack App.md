@@ -141,9 +141,208 @@ public Person[] getPerson( ) throws URISyntaxException {
 19. Save all the code and restart the server (If you are wondering why we are not compiling, STS does it automatically for you). Test all the end points we just created with postman. Sample data for input:
 `{"name":"Jason Burns","email":"jason.burns@gmail.com","phone":"0499998888"}`
 
+#### Actually saving it in the DB
+
+20. Saving data in the database is eventually what is required. We will use Postgres for this purpose (only because it is already installed in most of the machines). Run the postgres server and create a DB named customerDB in it.
+
+21. We need to include a few more dependencies in pom.xml for confirguring the database and to use the right driver. A driver is tool which actually carries the instructions and data between the DB server and our server application. Include the following dependencies.
+
+```
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+	        <dependency>
+        	    <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-autoconfigure</artifactId>
+        	</dependency>
+		
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.2.6</version>
+		</dependency>
+		
+```
+22. Now the we have to configure the datasource. Spring boot has made this simple by automatically looking for application.properties under `src/main/resource`. If you don't have a folder name resource under main, create one and then create a file in that folder named, application.properties, with the following content.
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/customerDB
+#server.port=8999
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto = update
+
+# Fix Postgres JPA Error (Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented).
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
+23. Now comes the major part. We have to define a repository and model. Repository is where we will define all the methods we would like to provide for our table in the DB. A model is literally the model or a representation of the table as a class. To make our Person class to qualify as a table, all we have to do it, make the Spring application understand that it is not an ordinary class but and entity in the database. As complex as it may sound, this is done with just a one-word annotation. Your new version of Person class will look like the following.
+```
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "persons")
+public class Person {
+
+	@Id
+	private String email = null;
+
+	private String name = null;
+	
+	
+	private String phone = null;
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", email=" + email + ", phone=" + phone + "]";
+	}
+
+}
+
+```
+24. Similar to step 8, we will create another package named `repository` and create an interface CustomerRepository. Interface are specific to Java. They only define methods. They do not implement them. The dependency we included will smartly looks for class which implements the interface and act accordingly. The analogy is like a phone's GUI. You are auto configured to use different phones, as the GUI is the same. Something similar happens here. 
+```
+package com.lavjava.example.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+
+import com.lavjava.example.models.Person;
+
+public interface CustomerRepository extends CrudRepository<Person, Integer> {
+
+	@SuppressWarnings("unchecked")
+	Person save(Person person);
+    
+    	Person findByEmail(String email);
+
+    	@Query(value = "SELECT * FROM persons", nativeQuery = true)
+    	List<Person> getAllPersons();
+}
+ 
+
+```
+25. Our MyServerController class was only temporarily persisting the data in a hashMap. When you restarted the server, the data was all gone. Let's create another controller, in the same package as MyServerController. Let's call it `MyServerToDBController`. This is not a real life sceanrio. In real life, it will only be MyServerToDBController. But we will have two separate ones, just to differentiate between transient(temporary or in-memory) data and persistent(actual database) data.
+  
+```
+package com.lavjava.example.controller;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lavjava.example.models.Person;
+import com.lavjava.example.repository.CustomerRepository;
+
+@RestController
+public class MyServerToDBController {
+	
+	private  CustomerRepository customerRepository = null;
+	
+	@Autowired
+	public MyServerToDBController(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+	
+	
+	@RequestMapping(value = "db/person", method = RequestMethod.POST)
+    public String getPersonInfo(@RequestBody Person person) {
+		customerRepository.save(person);
+		return "Person added";
+    }
 
 
+	@RequestMapping("/db/persons")
+	public Iterable<Person> getPerson( ) throws URISyntaxException {
+		return customerRepository.findAll();
+	}
 
-  
-  
-  
+
+	@RequestMapping("/db/person/{email}")
+    public Person getPersonInfo(@PathVariable String email) {
+		return customerRepository.findByEmail(email);
+    }
+	
+}
+
+```
+26. Check all the end points. If it all went well, you just finished complete back-end implementation. 
+
+27. To include pages to be rendered to the client side, we can include html, css and image files in the server side. These can be included inside a folder named `static` in the `resources` folder. These require no mapping and can be accessed through the base url directly.
+Create a folder named `static` under resources. Create a file named `login.html` in it and include the following content. 
+
+```
+<html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+const createUser = () => {
+	axios.post("/db/person", {
+		 "email": document.getElementById("email").value,
+		    "name": document.getElementById("fullname").value,
+		    "phone": document.getElementById("phone").value
+	}).then(res => {
+		return res
+	}).then(data =>{
+		document.getElementById("result").innerText = "Success";
+	})
+}
+</script>
+Full Name <input type="text" id="fullname">
+Email <input type="text" id="email">
+Phone <input type="text" id="phone">
+<button onclick="createUser()">Create User</button>
+
+<div id="result">
+</div>
+</html>
+```
+28. Save the html and restart the server. Go to url `http://localhost:8080/login.html`. This should render an (ugly looking) html page with provision to enter the user values. and enter the details and see if it actually reflects in the database. 
+
+29. Challenges/Assignment - 
+* Add update, delete and search by name functionality to the server code.
+* Include HTML pages, CSS to provide a front-end for each end-point created.
+* The result should be a small contact book system which allows to add details of a person and allows search based on various parameters. 
+
+## THE END
