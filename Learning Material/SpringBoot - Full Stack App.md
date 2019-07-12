@@ -42,8 +42,11 @@ SpringBoot is custom made with the modern-day developer in mind. All that the de
   ```
   *Once you do the above steps and save, you will see a Maven Dependencies is generated in the project folder with all the jars.*
 4. If the JRE that is being pointed to is not 1.8, we need to change it to use 1.8. Right click on you project folder, click on `Build Path` choose `Configure Build Path`. Make sure `Java Build Path` is highlighted in the left pane. In the `Libraries` tab. Click on JRE 1.5 and click on `Remove`. Then, click on `Add Library`. Choose `JRE System Library` and click `Next`. Select `Workspace default JRE` if not already selected and then click on `Finish`. Go to the `Order and Export` tab and check `Maven Dependencies` and `JRE System Library`. Click on `Apply and Close`.
-5. Right click on the project folder and create a new class, with a `main` method. As we saw earlier, this is just a simple java Runnable class. 
+
+5. Right click on the project folder and create a new class, with a `main` method. As we saw earlier, this is just a simple java Runnable class.
+
 6. We use something called annotations which tell the Java compiler what kind of application this is. We are trying to create a SpringBootApplication. We will add this annotation `@SprintBootApplication` to the class. This will mark you with an error and prompt you to import and use appropriate class to understand the annotation. The IDE will magically do this for you.
+
 7. Now all that we have to do is start a server instance, which will start this Runnable class as a SpringBoot application. 
   ```
   package com.lavjava.example;
@@ -62,7 +65,9 @@ public class App
 }
 
 ```
+
 8. Now let's create an end point which we want to serve on our server. Right click on the parent folder of your java application, and create a new `package` and name it `controller`. It can be anything, but we are naming it controller for clarity.
+
 9. Within the new created package, right click and create a new class called `MyServerController`(Call it whatever you want. It is just a name :)). This class is going to be our RestController. So we will annotate the class with `@RestController` 
 
 10. We will now ammend the class, to provide our first resource mapping. 
