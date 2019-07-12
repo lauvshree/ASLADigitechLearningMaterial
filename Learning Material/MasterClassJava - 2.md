@@ -190,7 +190,14 @@ public class APEmployee {
 
 #### Point to ponder
 
-Why do you have the attributes as private and then provide public methods to access them? Doesn't it make it simpler to make the attributes public?
+Why do you have the attributes as private and then provide public methods to access them? Doesn't it make it simpler to make the attributes public? 
+
+
+Think of the class APEmployee having public attribute name instead of private attribute name. We can set 
+`apEmployee1.name = <anything that qualifies as a string>`
+
+But we want name to only be string of alphabets. Or for instance I want age only between 18 to 60. All these validations can be handled in the setter. That is why the attribute is kept private and is allowed access only through setters and getters. This is not mandatory. It is a tried and tested coding practice.
+
 
 #### Loading a class and creating an object
 When we run a class, we load the class. Loading a class is when the bytecodes are read and the class is ready for use. We only create an object when we call the `new <constructor>`. 
