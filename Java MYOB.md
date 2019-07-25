@@ -86,19 +86,40 @@ and paste this in the appropriate place. `export JAVA_HOME=/Users/lavanyas/Downl
 To do: Change the third line to `String i="hello"`
 
 14. There are many primitive data types in Java. These are:
-* byte
-* short
-* int
-* long
-* float
-* double
-* char
-* boolean
+* byte (-128 to 127)
+* short (-32,768 to 32,767) 
+* int (-2,147,483,648 to 2,147,483,647)
+* long (-9223372036854775808 to 9223372036854775807)
+* float (int with decimal portion)
+* double (long with decimal portion)
+* char (16 bits)
+* boolean (1 bit)
 
 They are called primitive because they are primitive and all systems know how to treat these data types. Anything other than these, will be built based on these. For instance, String is not actually a String. It is an array of char type. Don't get hassled as Java provides ways to use these. They provide wrapper classes for all the primitive data types. Before we know what the difference is, let's explore the primitive data types.
 
-
-
 We will use IntelliJ IDE for our learning and development purpose. Download the same from this <a href="https://www.jetbrains.com/idea/download/#section=mac">link</a>. We will use the community edition. 
-1. 
+Try the following assignments.
+`byte b =127`
+`System.out.println(b)`
+`short sh = 32767`
+`System.out.println(sh)`
+`int j = 2147483647`
+`System.out.println(j)`
+`long l = 9223372036854775807`
+`System.out.println(l)`
+`float f = 9999999`
+`System.out.println(f)`
+`double d = 9999999.999999999`
+`System.out.println(f)`
+
+`byte b =128`
+`System.out.println(b)`
+`short sh = 32768`
+`System.out.println(sh)`
+`int j = 2147483648`
+`System.out.println(j)`
+`long l = 9223372036854775808`
+`System.out.println(l)`
+`float f = 10000000`
+`System.out.println(f)`
 
