@@ -99,27 +99,49 @@ They are called primitive because they are primitive and all systems know how to
 
 We will use IntelliJ IDE for our learning and development purpose. Download the same from this <a href="https://www.jetbrains.com/idea/download/#section=mac">link</a>. We will use the community edition. 
 Try the following assignments.
+
 `byte b =127`
+
 `System.out.println(b)`
+
 `short sh = 32767`
+
 `System.out.println(sh)`
+
 `int j = 2147483647`
+
 `System.out.println(j)`
+
 `long l = 9223372036854775807`
+
 `System.out.println(l)`
+
 `float f = 9999999`
-`System.out.println(f)`
-`double d = 9999999.999999999`
+
 `System.out.println(f)`
 
+`double d = 9999999.999999999`
+
+`System.out.println(f)`
+
+
 `byte b =128`
+
 `System.out.println(b)`
+
 `short sh = 32768`
+
 `System.out.println(sh)`
+
 `int j = 2147483648`
+
 `System.out.println(j)`
+
 `long l = 9223372036854775808`
+
 `System.out.println(l)`
+
 `float f = 10000000`
+
 `System.out.println(f)`
 
