@@ -85,6 +85,15 @@ and paste this in the appropriate place. `export JAVA_HOME=/Users/lavanyas/Downl
 *Note that in the third line we didn't have to mention the type again, as the variable is already declared.*
 To do: Change the third line to `String i="hello"`
 
+### Few things about JShell which you might find useful
+
+
+* `/vars` gets the list of all variable in the shell envirnoment at the given point of time. 
+* /history lists all the commands including the JShell and Java commands that have been run in the session. 
+* /list lists the Java commands which are currently valid. You can quote the line number and run the command again preceding the line number with a '/'. For example to run a statement in line number 5 of the list, type `/5` and press enter. 
+
+
+
 14. There are many primitive data types in Java. These are:
 * byte (-128 to 127)
 * short (-32,768 to 32,767) 
@@ -144,4 +153,63 @@ Try the following assignments.
 `float f = 10000000`
 
 `System.out.println(f)`
+
+### Casting
+
+Casting is the name given to changing the type of the variable. 'Casting' in movies or TV Series means someone plays a role of a person, different from who they really are. In programming language, a variable of one type is made to play the role of another type. 
+
+15. ```
+    short sh = 5;
+    int i = (int)sh;
+    System.out.println(i);
+    ```
+16. We learnt the rangle of values each data type can store. 'short' cannot store the entire range of 'int'. What happens when you do the following?
+
+```
+int j = 2147483647;
+short sh = (short)j;
+System.out.println(sh);
+```
+
+17. Exercise:
+    For the next 15 minutes, try converting from one type to another in all permutation and combination and note down your observations.
+    Discuss why it is important to use the appropriate data type.
+    
+    
+### Creating a Runnable class
+18. We have many types of components in Java. There are Classes, Interfaces, Enums, Packages, Modules, Lambdas. The most basic of these is a Class. Everything in Java is a class. Literally everything. When you write the simplest application to print Hello World, even that is a class. It is called a Runnable Class. What we did in JShell is just executing statement. We will now write a runnable class. We will use 
+
+https://www.tutorialspoint.com/compile_java_online.php
+
+```
+public class MyFirstRunnableClass {
+   public static void main(String s[]) {
+       System.out.println("Hello World");
+   }
+}
+```
+
+Java langauge grammar thrives on { } and ;. Every block of code in Java has to be within {} and every statement which is to be executed should end with ';'. We didn't have to do this in the JShell because JShell does it for you implicitly. 
+
+Try a few things:
+
+Try removing the word public in the class.
+
+Try switching public and static in the main method.
+
+Try removing the word public in the main method.
+
+Try removing the word static in the main method.
+
+### Things you should know about Java
+1. To run a class it has to be a public class
+2. You run a runnable class with its classname `java <name of the class>`
+3. The class should have a public static void main method which takes a String [] argument.
+4. The String [] argument is nothing but the command line arguments you give the class when you run it. You can refer to the string array with any variable name. Commonly used ones as *s* and *args*.
+5. A class has to be written in a file with the extension Java.
+6. A class is first compiled and then run. Compilation is the process of converting the source Java file into bytecodes, which the JVM understands. A class can be compiled on one system and run on another system - Platform independence 
+7. When you compile a .java file, it produces a .class file with the same name if the compilation is successful. The .class file contains bytecodes (non-human readable form) which can be interpreted by an Operating System which has Java Runtime Environment set up. 
+8. Most computers in the modern days have Java Runtime Environment.
+
+
 
