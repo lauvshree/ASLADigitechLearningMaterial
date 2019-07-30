@@ -389,8 +389,95 @@ Besides `=`, the other assignement operators are:
    </tr>
 </table>
 
+Relational operators or Comaprtitive operators are the other kind of operators. These are pretty similar to other languages. But it is goos to bear in mind that `==` and `!=` compare the objects and not the value of the objects. To compare the value of the objects we will use the `.equals()` method. 
+
+<table>
+  <tr>
+    <td>
+      ==
+    </td>
+    <td>
+      See if the objects in the left and right are equal. For primitive types, it compares values.
+      int i = 5;
+      int j = 5;
+      System.out.println("i == j "+i == j);
+    </td>
+   </tr>
+  <tr>
+    <td>
+      !=
+    </td>
+    <td>
+      See if the objects in the left and right are inequal. For primitive types, it compares values.
+      int i = 5;
+      int j = 5;
+      System.out.println("i != j "+i != j);
+      System.out.println("i != 6 "+i != 6);
+    </td>
+   </tr>
+
+<tr>
+    <td>
+      >
+    </td>
+    <td>
+      See if the value in the left is greater than the one on the right.
+      int i = 7;
+      int j = 6;
+      System.out.println("i>j "+i > j);
+    </td>
+   </tr>
+<tr>
+    <td>
+      >
+    </td>
+    <td>
+      See if the value in the left is lesser than the one on the right.
+      int i = 7;
+      int j = 6;
+      System.out.println("i<j "+i < j);
+    </td>
+   </tr>
+<tr>
+    <td>
+      >=
+    </td>
+    <td>
+      See if the value in the left is greater than or equal to the one on the right.
+      int i = 7;
+      int j = 6;
+      System.out.println("i>=j "+i >= j);
+    </td>
+   </tr>
+<tr>
+    <td>
+      >
+    </td>
+    <td>
+      See if the value in the left is lesser than or equal to the one on the right.
+      int i = 7;
+      int j = 6;
+      System.out.println("i<=j "+i <= j);
+    </td>
+   </tr>
+</table>
+
 
 ### Obtaining input from user
-We saw yesterday that to print out anything from a Java program we use System.out which represents the standard output, the monitor. To obtain any input from the user we will use the standard input which is the keyboard. But the input from the keyboard can only be obtained as bytes. To obtain input as String we use a class called Scanner. 
+We saw yesterday that to print out anything from a Java program we use System.out which represents the standard output, the monitor. To obtain any input from the user we will use the standard input which is the keyboard. But the input from the keyboard can only be obtained as bytes. To obtain input as String we use a class called Scanner. The Scanner object's constructor takes an input stream as argument. Since we are going to provide input through the keyboard, the argument will be `System.in` which represents the standard input. Scanner is not available in the default packages that are available for java coding. We have to explicitly import the package.
 
+```
+import java.util.Scanner;
 
+public class UserInput {
+    public static void main(String s[]) {
+        //We create a scanner object which will read from keyboard and give it a reference name myScanner
+        Scanner myScanner = new Scanner(System.in);
+        System.out.println("What is your name? ");
+        //Read the next line that the user inputs
+        String name = myScanner.nextLine();
+        System.out.println("Hello "+name);
+    }
+}
+
+```
