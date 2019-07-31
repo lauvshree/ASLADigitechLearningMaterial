@@ -389,7 +389,7 @@ Besides `=`, the other assignement operators are:
    </tr>
 </table>
 
-Relational operators or Comaprtitive operators are the other kind of operators. These are pretty similar to other languages. But it is goos to bear in mind that `==` and `!=` compare the objects and not the value of the objects. To compare the value of the objects we will use the `.equals()` method. 
+Relational operators or Compartitive operators are the other kind of operators. These are pretty similar to other languages. But it is goos to bear in mind that `==` and `!=` compare the objects and not the value of the objects. To compare the value of the objects we will use the `.equals()` method. 
 
 <table>
   <tr>
@@ -458,6 +458,35 @@ Relational operators or Comaprtitive operators are the other kind of operators. 
       int i = 7;
       int j = 6;
       System.out.println("i<=j "+i <= j);
+    </td>
+   </tr>
+</table>
+
+### Logical operators
+
+<table>
+  <tr>
+    <td>
+      ||
+    </td>
+    <td>
+      Or  - Used to check either-or conditions.
+    </td>
+   </tr>
+  <tr>
+    <td>
+      &&
+    </td>
+    <td>
+      And  - Used to check this and that conditions.
+    </td>
+   </tr>
+  <tr>
+    <td>
+      !
+    </td>
+    <td>
+      Not  - Used to check if something is `not` true.
     </td>
    </tr>
 </table>
