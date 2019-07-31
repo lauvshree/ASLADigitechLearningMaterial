@@ -211,5 +211,7 @@ Try removing the word static in the main method.
 7. When you compile a .java file, it produces a .class file with the same name if the compilation is successful. The .class file contains bytecodes (non-human readable form) which can be interpreted by an Operating System which has Java Runtime Environment set up. 
 8. Most computers in the modern days have Java Runtime Environment.
 
+### Installing IntelliJ
+IntelliJ is the IDE we will be using to write our Java code. Go to their downloads page and download the correct installer for your operating system. Once the download has completed, double-click the file and step through the installation wizard.This will install IntelliJ, which is one of the most used IDE for Java which offers code completion and other important features you may need in course of programming.
 
 We will try the same thing in IntelliJ. 
