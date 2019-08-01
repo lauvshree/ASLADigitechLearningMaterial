@@ -221,7 +221,53 @@ public class CreatingSubClassInstanceInDiffPackage {
     </td>
     </tr></table>
 
-You would have noticed this when you implemented the toString method in Customer class. It automatically annotates the method implementation with a `@Overrides`. 
+##### Over-riding
+A subclass  has the option to only keep some of the super class methods and if it wants to implement its own for the other methods.
+You would have noticed this when you implemented the toString method in Customer class. It automatically annotates the method implementation with a `@Overrides`. When you implement toString you are overriding the default implementation in the Object class which print the hashcode of the object. 
+
+**Activity** Override the methods in the subclasses you created above. :bulb:Tip: Use the IntelliJ Generators. Make the method body print some distinctive message so that you know it is from the subclasses. We use these over-ridden methods for the next topic.
+
+#### Polymorphism
+Polymorphism is when the method takes different forms depending on the object it is invoked on. Before you understand this, you have to know that all the subclasses can be referred to with as the superclass type. I can have, 
+`SuperClass s1 = new SubClassInDiffPackage();` or `SuperClass s1 = new SubClassInSamePackage()`. Let's create different objects depending on what the user prefers and then invoke the over-ridden methods and observe the behavior.
+
+```
+package com.myob.onemorepackage;
+
+import com.myob.examples.SuperClass;
+import com.myob.examples.SubClassInSamePackage;
+import com.myob.anotherpkg.SubClassInDiffPackage;
+
+import java.util.Scanner;
+
+public class CreatingDiffObjectsWithSuperRef {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which object do you want to create?");
+        System.out.println("Enter A for SuperClass");
+        System.out.println("Enter B for SubClassInSamePackage");
+        System.out.println("Enter C for SubClassInDiffPackage");
+        String reply = scanner.nextLine();
+        SuperClass sc = null;
+
+        switch(reply) {
+            case "A" :  sc = new SuperClass();
+                        break;
+            case "B" :  sc = new SubClassInSamePackage();
+                        break;
+            case "C" :  sc = new SubClassInDiffPackage();
+                        break;
+        }
+        sc.method4();
+
+    }
+}
+
+```
+Depending on whether the choice was A, B or C, a different object would have been created. And the method call to method4 will be different depending on which object was created. A subclass object can be referred with super class reference. But only the methods which the subclass inherited from superclass can be invoked through the super class reference. 
+
+
+
 
 
 
