@@ -1,7 +1,7 @@
 ### Prerequisite
 React, Java script, Node JS
 
-We are familiar with the advantages and disadvantages of smart(class component) and dumb(function) components in React. Smart components are react Class components, which have both properties and states. Dumb components are function components which have only properties but no state. 
+We are familiar with the advantages and disadvantages of smart(class component) and dumb(function component) components in React. Smart components are react Class components, which have both properties and states. Dumb components are function components which have only properties but no state. 
 
 Having the state within the class component might make it smart. But when the state needs to be accessed outside of the component, it becomes impossible. There are many occasions when it is imperative to pass the state from one component to the other irrespective of their nesting. It is for this purpose that, state management was separated from the components. In React we achieve this state management with Redux.
 
