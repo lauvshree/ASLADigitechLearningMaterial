@@ -1,4 +1,4 @@
-###Prerequisite
+### Prerequisite
 React, Java script, Node JS
 
 We are familiar with the advantages and disadvantages of smart(class component) and dumb(function) components in React. Smart components are react Class components, which have both properties and states. Dumb components are function components which have only properties but no state. 
