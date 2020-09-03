@@ -22,6 +22,7 @@ The most important part of React is *Component*. Component is piece of user inte
  The above statement is a JSX. It is not a string literal. Note that there are no quotes. This mark-up language is embedded within our normal HTML pages. This can be compiled and interepreted as Java Script by Babble, a special in-memory tool. Babble understands and allows use of the ES6 compatible Javascript features. JSX are embedded inside special script tags where the type attribute specifies the content need to use babel. `script type="text/babel"`
 
 ### Our first React JS page
+
 Let's build a very simple react page to start with. Since it uses external JS libraries these scripts need to be sourced inside our html. We will use 3 JS files to build our React application. 
 
 * React - this package holds the react source for components, state, props and all the code that is react.
