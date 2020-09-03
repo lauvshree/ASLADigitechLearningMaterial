@@ -63,10 +63,9 @@ This is a normal HTML page. Now we will render a React Component on it. Insert t
 
 ```
 ReactDOM.render(<h1>Hello World!</h1>,document.getElementById('comp1'));
-
 ```
 
-It might seem like we complicated an HTML to get just a <h1> displayed. This was just an easy example to get started. 
+It might seem like we complicated an HTML to get just a **h1** displayed. This was just an easy example to get started. 
 
 The JSX can also include expressions that need to be evaluated.
 
